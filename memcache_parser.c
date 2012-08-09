@@ -863,7 +863,8 @@ PHP_FUNCTION(memcache_parser_init)
 	callback.cmd_delete  = php_memcache_parser_delete;
 
 	ctx = emalloc(sizeof(php_memcache_parser_t));
-	ctx->finished = false;
+	ctx->finished = 1;
+	ctx->callback = NULL;
 	
 	memcache_parser_init(&ctx->parser, &callback, (void*)ctx);
 	ZEND_REGISTER_RESOURCE(return_value, ctx, memcache_parser_resource_handle);
@@ -887,7 +888,7 @@ PHP_FUNCTION(memcache_parser_execute)
 	}
 
 	ZEND_FETCH_RESOURCE(ctx, php_memcache_parser_t*, &rsc, -1, PHP_MEMCACHE_PARSER_RESOURCE_NAME, memcache_parser_resource_handle);
-	
+
 	if (Z_TYPE_P(nread) != IS_LONG) {
 		convert_to_long(nread);
 	}

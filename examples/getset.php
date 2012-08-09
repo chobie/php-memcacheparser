@@ -1,9 +1,10 @@
 <?php
 
 $parser = memcache_parser_init();
+$parser2 = memcache_parser_init();
 
 $msgs[] = "set aaa 0 0 10\r\nabcdefghij\r\n";
-$msgs[] = "get aaa\r\n";
+$msgs[] = "get aaa \r\n";
 
 $nread = 0;
 foreach($msgs as $msg) {
