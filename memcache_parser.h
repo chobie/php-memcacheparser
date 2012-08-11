@@ -70,6 +70,8 @@ typedef int (*memcache_parser_callback_delete)(
 		uint64_t time, bool noreply,
 		void* user);
 
+typedef int (*memcache_parser_callback_quit)(void* user);
+
 typedef struct {
 	memcache_parser_callback_retrieval cmd_get;
 	memcache_parser_callback_storage   cmd_set;
@@ -78,6 +80,7 @@ typedef struct {
 	memcache_parser_callback_storage   cmd_prepend;
 	memcache_parser_callback_cas       cmd_cas;
 	memcache_parser_callback_delete    cmd_delete;
+	memcache_parser_callback_quit      cmd_quit;
 } memcache_parser_callback;
 
 typedef struct {
@@ -110,7 +113,6 @@ typedef struct {
 
 void memcache_parser_init(memcache_parser* parser, memcache_parser_callback* callback, void* user);
 int memcache_parser_execute(memcache_parser* parser, const char* data, size_t len, size_t* off);
-
 
 typedef struct {
 	zend_fcall_info fci;

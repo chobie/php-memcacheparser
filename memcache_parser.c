@@ -71,15 +71,17 @@ enum {
 	CMD_CAS,
 
 	CMD_DELETE,
+
+	CMD_QUIT,
 };
 
 
-#line 259 "memcache_parser.rl"
+#line 276 "memcache_parser.rl"
 
 
 
 
-#line 83 "memcache_parser.c"
+#line 85 "memcache_parser.c"
 static const char _memcache_parser_actions[] = {
 	0, 1, 0, 1, 1, 1, 2, 1, 
 	4, 1, 5, 1, 6, 1, 7, 1, 
@@ -87,52 +89,54 @@ static const char _memcache_parser_actions[] = {
 	12, 1, 13, 1, 14, 1, 15, 1, 
 	16, 1, 17, 1, 18, 1, 19, 1, 
 	20, 1, 21, 1, 22, 1, 23, 1, 
-	24, 1, 25, 1, 26, 1, 27, 2, 
-	3, 1
+	24, 1, 25, 1, 26, 1, 27, 1, 
+	28, 1, 29, 2, 3, 1
 };
 
 static const unsigned char _memcache_parser_key_offsets[] = {
-	0, 0, 7, 8, 9, 10, 11, 12, 
-	13, 15, 18, 21, 22, 25, 26, 28, 
-	32, 33, 34, 35, 36, 37, 38, 40, 
-	43, 46, 47, 50, 51, 53, 56, 59, 
-	61, 62, 63, 64, 65, 66, 67, 68, 
-	69, 70, 71, 72, 76, 79, 82, 83, 
-	84, 85, 86, 87, 88, 90, 94, 95, 
-	99, 101, 102, 103, 104, 105, 106, 107, 
-	108, 109, 113, 114, 115, 117, 119, 123, 
-	124, 126, 127, 128, 129, 130, 131, 132, 
-	133, 134, 135, 136, 137, 138, 139, 140, 
-	141, 142, 143, 144, 145, 146, 147, 148, 
-	149, 152, 155, 162
+	0, 0, 8, 9, 10, 11, 12, 13, 
+	14, 16, 19, 22, 23, 26, 27, 29, 
+	33, 34, 35, 36, 37, 38, 39, 41, 
+	44, 47, 48, 51, 52, 54, 57, 60, 
+	62, 63, 64, 65, 66, 67, 68, 69, 
+	70, 71, 72, 73, 77, 80, 83, 84, 
+	85, 86, 87, 88, 89, 91, 95, 96, 
+	100, 102, 103, 104, 105, 106, 107, 108, 
+	109, 110, 114, 115, 116, 118, 120, 124, 
+	125, 128, 129, 130, 131, 132, 133, 134, 
+	135, 136, 137, 138, 139, 140, 141, 142, 
+	143, 144, 145, 146, 147, 148, 149, 150, 
+	151, 152, 153, 154, 155, 156, 159, 162, 
+	170
 };
 
 static const char _memcache_parser_trans_keys[] = {
-	97, 99, 100, 103, 112, 114, 115, 112, 
-	112, 101, 110, 100, 32, 33, 126, 32, 
-	33, 126, 48, 49, 57, 32, 48, 49, 
-	57, 32, 49, 57, 13, 32, 48, 57, 
-	10, 13, 10, 97, 115, 32, 33, 126, 
+	97, 99, 100, 103, 112, 113, 114, 115, 
+	112, 112, 101, 110, 100, 32, 33, 126, 
 	32, 33, 126, 48, 49, 57, 32, 48, 
-	49, 57, 32, 49, 57, 32, 48, 57, 
-	48, 49, 57, 13, 32, 10, 13, 10, 
-	110, 111, 114, 101, 112, 108, 121, 13, 
-	13, 32, 48, 57, 32, 48, 57, 32, 
-	48, 57, 101, 108, 101, 116, 101, 32, 
-	33, 126, 13, 32, 33, 126, 10, 48, 
-	110, 49, 57, 13, 32, 110, 111, 114, 
-	101, 112, 108, 121, 13, 13, 32, 48, 
-	57, 101, 116, 32, 115, 33, 126, 13, 
-	32, 33, 126, 10, 33, 126, 32, 114, 
-	101, 112, 101, 110, 100, 101, 112, 108, 
-	97, 99, 101, 101, 116, 110, 111, 114, 
-	101, 112, 108, 121, 13, 32, 48, 57, 
-	32, 48, 57, 97, 99, 100, 103, 112, 
+	49, 57, 32, 49, 57, 13, 32, 48, 
+	57, 10, 13, 10, 97, 115, 32, 33, 
+	126, 32, 33, 126, 48, 49, 57, 32, 
+	48, 49, 57, 32, 49, 57, 32, 48, 
+	57, 48, 49, 57, 13, 32, 10, 13, 
+	10, 110, 111, 114, 101, 112, 108, 121, 
+	13, 13, 32, 48, 57, 32, 48, 57, 
+	32, 48, 57, 101, 108, 101, 116, 101, 
+	32, 33, 126, 13, 32, 33, 126, 10, 
+	48, 110, 49, 57, 13, 32, 110, 111, 
+	114, 101, 112, 108, 121, 13, 13, 32, 
+	48, 57, 101, 116, 32, 115, 33, 126, 
+	13, 32, 33, 126, 10, 13, 33, 126, 
+	32, 114, 101, 112, 101, 110, 100, 117, 
+	105, 116, 13, 10, 101, 112, 108, 97, 
+	99, 101, 101, 116, 110, 111, 114, 101, 
+	112, 108, 121, 13, 32, 48, 57, 32, 
+	48, 57, 97, 99, 100, 103, 112, 113, 
 	114, 115, 0
 };
 
 static const char _memcache_parser_single_lengths[] = {
-	0, 7, 1, 1, 1, 1, 1, 1, 
+	0, 8, 1, 1, 1, 1, 1, 1, 
 	0, 1, 1, 1, 1, 1, 0, 2, 
 	1, 1, 1, 1, 1, 1, 0, 1, 
 	1, 1, 1, 1, 0, 1, 1, 2, 
@@ -141,10 +145,11 @@ static const char _memcache_parser_single_lengths[] = {
 	1, 1, 1, 1, 0, 2, 1, 2, 
 	2, 1, 1, 1, 1, 1, 1, 1, 
 	1, 2, 1, 1, 2, 0, 2, 1, 
-	0, 1, 1, 1, 1, 1, 1, 1, 
 	1, 1, 1, 1, 1, 1, 1, 1, 
 	1, 1, 1, 1, 1, 1, 1, 1, 
-	1, 1, 7, 0
+	1, 1, 1, 1, 1, 1, 1, 1, 
+	1, 1, 1, 1, 1, 1, 1, 8, 
+	0
 };
 
 static const char _memcache_parser_range_lengths[] = {
@@ -160,113 +165,119 @@ static const char _memcache_parser_range_lengths[] = {
 	1, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	1, 1, 0, 0
+	0, 0, 0, 0, 0, 1, 1, 0, 
+	0
 };
 
 static const short _memcache_parser_index_offsets[] = {
-	0, 0, 8, 10, 12, 14, 16, 18, 
-	20, 22, 25, 28, 30, 33, 35, 37, 
-	41, 43, 45, 47, 49, 51, 53, 55, 
-	58, 61, 63, 66, 68, 70, 73, 76, 
-	79, 81, 83, 85, 87, 89, 91, 93, 
-	95, 97, 99, 101, 105, 108, 111, 113, 
-	115, 117, 119, 121, 123, 125, 129, 131, 
-	135, 138, 140, 142, 144, 146, 148, 150, 
-	152, 154, 158, 160, 162, 165, 167, 171, 
-	173, 175, 177, 179, 181, 183, 185, 187, 
-	189, 191, 193, 195, 197, 199, 201, 203, 
-	205, 207, 209, 211, 213, 215, 217, 219, 
-	221, 224, 227, 235
+	0, 0, 9, 11, 13, 15, 17, 19, 
+	21, 23, 26, 29, 31, 34, 36, 38, 
+	42, 44, 46, 48, 50, 52, 54, 56, 
+	59, 62, 64, 67, 69, 71, 74, 77, 
+	80, 82, 84, 86, 88, 90, 92, 94, 
+	96, 98, 100, 102, 106, 109, 112, 114, 
+	116, 118, 120, 122, 124, 126, 130, 132, 
+	136, 139, 141, 143, 145, 147, 149, 151, 
+	153, 155, 159, 161, 163, 166, 168, 172, 
+	174, 177, 179, 181, 183, 185, 187, 189, 
+	191, 193, 195, 197, 199, 201, 203, 205, 
+	207, 209, 211, 213, 215, 217, 219, 221, 
+	223, 225, 227, 229, 231, 233, 236, 239, 
+	248
 };
 
 static const char _memcache_parser_trans_targs[] = {
-	2, 19, 46, 66, 74, 80, 86, 0, 
-	3, 0, 4, 0, 5, 0, 6, 0, 
-	7, 0, 8, 0, 9, 0, 10, 9, 
-	0, 11, 97, 0, 12, 0, 13, 96, 
-	0, 14, 0, 15, 0, 16, 88, 15, 
-	0, 17, 0, 18, 0, 98, 0, 20, 
-	0, 21, 0, 22, 0, 23, 0, 24, 
-	23, 0, 25, 45, 0, 26, 0, 27, 
-	44, 0, 28, 0, 29, 0, 30, 29, 
-	0, 31, 43, 0, 32, 35, 0, 33, 
-	0, 34, 0, 98, 0, 36, 0, 37, 
-	0, 38, 0, 39, 0, 40, 0, 41, 
-	0, 42, 0, 32, 0, 32, 35, 43, 
-	0, 28, 44, 0, 26, 45, 0, 47, 
-	0, 48, 0, 49, 0, 50, 0, 51, 
-	0, 52, 0, 53, 0, 54, 55, 53, 
-	0, 98, 0, 56, 58, 65, 0, 54, 
-	57, 0, 58, 0, 59, 0, 60, 0, 
-	61, 0, 62, 0, 63, 0, 64, 0, 
-	54, 0, 54, 57, 65, 0, 67, 0, 
-	68, 0, 69, 73, 0, 70, 0, 71, 
-	72, 70, 0, 98, 0, 70, 0, 69, 
-	0, 75, 0, 76, 0, 77, 0, 78, 
-	0, 79, 0, 7, 0, 81, 0, 82, 
-	0, 83, 0, 84, 0, 85, 0, 7, 
-	0, 87, 0, 7, 0, 89, 0, 90, 
-	0, 91, 0, 92, 0, 93, 0, 94, 
-	0, 95, 0, 16, 0, 14, 96, 0, 
-	12, 97, 0, 2, 19, 46, 66, 74, 
-	80, 86, 0, 99, 0
+	2, 19, 46, 66, 74, 80, 85, 91, 
+	0, 3, 0, 4, 0, 5, 0, 6, 
+	0, 7, 0, 8, 0, 9, 0, 10, 
+	9, 0, 11, 102, 0, 12, 0, 13, 
+	101, 0, 14, 0, 15, 0, 16, 93, 
+	15, 0, 17, 0, 18, 0, 103, 0, 
+	20, 0, 21, 0, 22, 0, 23, 0, 
+	24, 23, 0, 25, 45, 0, 26, 0, 
+	27, 44, 0, 28, 0, 29, 0, 30, 
+	29, 0, 31, 43, 0, 32, 35, 0, 
+	33, 0, 34, 0, 103, 0, 36, 0, 
+	37, 0, 38, 0, 39, 0, 40, 0, 
+	41, 0, 42, 0, 32, 0, 32, 35, 
+	43, 0, 28, 44, 0, 26, 45, 0, 
+	47, 0, 48, 0, 49, 0, 50, 0, 
+	51, 0, 52, 0, 53, 0, 54, 55, 
+	53, 0, 103, 0, 56, 58, 65, 0, 
+	54, 57, 0, 58, 0, 59, 0, 60, 
+	0, 61, 0, 62, 0, 63, 0, 64, 
+	0, 54, 0, 54, 57, 65, 0, 67, 
+	0, 68, 0, 69, 73, 0, 70, 0, 
+	71, 72, 70, 0, 103, 0, 71, 70, 
+	0, 69, 0, 75, 0, 76, 0, 77, 
+	0, 78, 0, 79, 0, 7, 0, 81, 
+	0, 82, 0, 83, 0, 84, 0, 103, 
+	0, 86, 0, 87, 0, 88, 0, 89, 
+	0, 90, 0, 7, 0, 92, 0, 7, 
+	0, 94, 0, 95, 0, 96, 0, 97, 
+	0, 98, 0, 99, 0, 100, 0, 16, 
+	0, 14, 101, 0, 12, 102, 0, 2, 
+	19, 46, 66, 74, 80, 85, 91, 0, 
+	104, 0
 };
 
 static const char _memcache_parser_trans_actions[] = {
-	1, 1, 1, 1, 1, 1, 1, 0, 
+	1, 1, 1, 1, 1, 1, 1, 1, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	39, 0, 0, 0, 3, 0, 5, 0, 
-	0, 7, 7, 0, 9, 0, 11, 11, 
-	0, 13, 0, 15, 0, 17, 17, 0, 
-	0, 29, 0, 0, 0, 49, 0, 0, 
-	0, 43, 0, 0, 0, 3, 0, 5, 
+	0, 39, 0, 0, 0, 3, 0, 5, 
 	0, 0, 7, 7, 0, 9, 0, 11, 
-	11, 0, 13, 0, 15, 0, 17, 0, 
-	0, 25, 25, 0, 27, 27, 0, 29, 
-	0, 0, 0, 51, 0, 0, 0, 0, 
+	11, 0, 13, 0, 15, 0, 17, 17, 
+	0, 0, 29, 0, 0, 0, 51, 0, 
+	0, 0, 43, 0, 0, 0, 3, 0, 
+	5, 0, 0, 7, 7, 0, 9, 0, 
+	11, 11, 0, 13, 0, 15, 0, 17, 
+	0, 0, 25, 25, 0, 27, 27, 0, 
+	29, 0, 0, 0, 53, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 19, 0, 27, 27, 0, 
-	0, 13, 0, 0, 9, 0, 0, 0, 
-	0, 0, 0, 0, 0, 0, 0, 45, 
-	0, 0, 0, 3, 0, 5, 5, 0, 
-	0, 53, 0, 21, 0, 21, 0, 23, 
-	23, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 19, 0, 27, 27, 
+	0, 0, 13, 0, 0, 9, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	19, 0, 23, 23, 0, 0, 0, 0, 
-	33, 0, 0, 33, 0, 3, 0, 5, 
-	5, 0, 0, 47, 0, 55, 0, 0, 
+	45, 0, 0, 0, 3, 0, 5, 5, 
+	0, 0, 55, 0, 21, 0, 21, 0, 
+	23, 23, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 41, 0, 0, 0, 0, 
-	0, 0, 0, 0, 0, 0, 0, 37, 
-	0, 0, 0, 35, 0, 0, 0, 0, 
+	0, 19, 0, 23, 23, 0, 0, 0, 
+	0, 33, 0, 0, 33, 0, 3, 0, 
+	5, 5, 0, 0, 49, 0, 0, 59, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 19, 0, 13, 0, 0, 
-	9, 0, 0, 1, 1, 1, 1, 1, 
-	1, 1, 0, 31, 0
+	0, 0, 0, 0, 0, 41, 0, 0, 
+	0, 0, 0, 47, 0, 0, 0, 57, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 37, 0, 0, 0, 35, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 19, 
+	0, 13, 0, 0, 9, 0, 0, 1, 
+	1, 1, 1, 1, 1, 1, 1, 0, 
+	31, 0
 };
 
 static const int memcache_parser_start = 1;
-static const int memcache_parser_first_final = 98;
+static const int memcache_parser_first_final = 103;
 static const int memcache_parser_error = 0;
 
 static const int memcache_parser_en_main = 1;
-static const int memcache_parser_en_data = 99;
+static const int memcache_parser_en_data = 104;
 
 
-#line 263 "memcache_parser.rl"
+#line 280 "memcache_parser.rl"
 
 void memcache_parser_init(memcache_parser* parser, memcache_parser_callback* callback, void* user)
 {
 	int cs = 0;
 	int top = 0;
 	
-#line 264 "memcache_parser.c"
+#line 275 "memcache_parser.c"
 	{
 	cs = memcache_parser_start;
 	top = 0;
 	}
 
-#line 269 "memcache_parser.rl"
+#line 286 "memcache_parser.rl"
 	memset(parser, 0, sizeof(memcache_parser));
 	parser->cs = cs;
 	parser->callback = *callback;
@@ -294,7 +305,7 @@ int memcache_parser_execute(memcache_parser* parser, const char* data, size_t le
 	//printf("\n");
 
 	
-#line 298 "memcache_parser.c"
+#line 309 "memcache_parser.c"
 	{
 	int _klen;
 	unsigned int _trans;
@@ -368,7 +379,7 @@ _match:
 		switch ( *_acts++ )
 		{
 	case 0:
-#line 77 "memcache_parser.rl"
+#line 79 "memcache_parser.rl"
 	{
 		parser->keys = 0;
 		parser->noreply = false;
@@ -376,99 +387,99 @@ _match:
 	}
 	break;
 	case 1:
-#line 83 "memcache_parser.rl"
+#line 85 "memcache_parser.rl"
 	{
 		MARK(key_pos[parser->keys], p);
 	}
 	break;
 	case 2:
-#line 86 "memcache_parser.rl"
+#line 88 "memcache_parser.rl"
 	{
 		SET_MARK_LEN(key_len[parser->keys], key_pos[parser->keys], p);
 	}
 	break;
 	case 3:
-#line 89 "memcache_parser.rl"
+#line 91 "memcache_parser.rl"
 	{
 		++parser->keys;
 	}
 	break;
 	case 4:
-#line 93 "memcache_parser.rl"
+#line 95 "memcache_parser.rl"
 	{
 		MARK(flags, p);
 	}
 	break;
 	case 5:
-#line 96 "memcache_parser.rl"
+#line 98 "memcache_parser.rl"
 	{
 		SET_UINT(flags, flags, p);
 	}
 	break;
 	case 6:
-#line 100 "memcache_parser.rl"
+#line 102 "memcache_parser.rl"
 	{
 		MARK(exptime, p);
 	}
 	break;
 	case 7:
-#line 103 "memcache_parser.rl"
+#line 105 "memcache_parser.rl"
 	{
 		SET_ULL(exptime, exptime, p);
 	}
 	break;
 	case 8:
-#line 107 "memcache_parser.rl"
+#line 109 "memcache_parser.rl"
 	{
 		MARK(bytes, p);
 	}
 	break;
 	case 9:
-#line 110 "memcache_parser.rl"
+#line 112 "memcache_parser.rl"
 	{
 		SET_UINT(bytes, bytes, p);
 	}
 	break;
 	case 10:
-#line 114 "memcache_parser.rl"
+#line 116 "memcache_parser.rl"
 	{
 		parser->noreply = true;
 	}
 	break;
 	case 11:
-#line 118 "memcache_parser.rl"
+#line 120 "memcache_parser.rl"
 	{
 		MARK(time, p);
 	}
 	break;
 	case 12:
-#line 121 "memcache_parser.rl"
+#line 123 "memcache_parser.rl"
 	{
 		SET_ULL(time, time, p);
 	}
 	break;
 	case 13:
-#line 125 "memcache_parser.rl"
+#line 127 "memcache_parser.rl"
 	{
 		MARK(cas_unique, p);
 	}
 	break;
 	case 14:
-#line 128 "memcache_parser.rl"
+#line 130 "memcache_parser.rl"
 	{
 		SET_ULL(cas_unique, cas_unique, p);
 	}
 	break;
 	case 15:
-#line 132 "memcache_parser.rl"
+#line 134 "memcache_parser.rl"
 	{
 		MARK(data_pos, p+1);
 		parser->data_count = parser->bytes;
-		{stack[top++] = cs; cs = 99; goto _again;}
+		{stack[top++] = cs; cs = 104; goto _again;}
 	}
 	break;
 	case 16:
-#line 137 "memcache_parser.rl"
+#line 139 "memcache_parser.rl"
 	{
 		if(--parser->data_count == 0) {
 			//printf("mark %d\n", parser->data_pos);
@@ -480,35 +491,39 @@ _match:
 	}
 	break;
 	case 17:
-#line 148 "memcache_parser.rl"
+#line 150 "memcache_parser.rl"
 	{ parser->command = CMD_GET;     }
 	break;
 	case 18:
-#line 150 "memcache_parser.rl"
+#line 152 "memcache_parser.rl"
 	{ parser->command = CMD_SET;     }
 	break;
 	case 19:
-#line 151 "memcache_parser.rl"
+#line 153 "memcache_parser.rl"
 	{ parser->command = CMD_REPLACE; }
 	break;
 	case 20:
-#line 152 "memcache_parser.rl"
+#line 154 "memcache_parser.rl"
 	{ parser->command = CMD_APPEND;  }
 	break;
 	case 21:
-#line 153 "memcache_parser.rl"
+#line 155 "memcache_parser.rl"
 	{ parser->command = CMD_PREPEND; }
 	break;
 	case 22:
-#line 155 "memcache_parser.rl"
+#line 157 "memcache_parser.rl"
 	{ parser->command = CMD_CAS;     }
 	break;
 	case 23:
-#line 157 "memcache_parser.rl"
+#line 159 "memcache_parser.rl"
 	{ parser->command = CMD_DELETE;  }
 	break;
 	case 24:
-#line 160 "memcache_parser.rl"
+#line 161 "memcache_parser.rl"
+	{ parser->command = CMD_QUIT;    }
+	break;
+	case 25:
+#line 164 "memcache_parser.rl"
 	{
 		unsigned int i;
 		++parser->keys;
@@ -521,8 +536,8 @@ _match:
 				) < -1 ) { goto convert_error; }
 	}
 	break;
-	case 25:
-#line 172 "memcache_parser.rl"
+	case 26:
+#line 176 "memcache_parser.rl"
 	{
 		if( CALLBACK(command, memcache_parser_callback_storage)(
 				MARK_PTR(key_pos[0]), parser->key_len[0],
@@ -534,8 +549,8 @@ _match:
 				) < -1 ) { goto convert_error; }
 	}
 	break;
-	case 26:
-#line 183 "memcache_parser.rl"
+	case 27:
+#line 187 "memcache_parser.rl"
 	{
 		if( CALLBACK(command, memcache_parser_callback_cas)(
 				MARK_PTR(key_pos[0]), parser->key_len[0],
@@ -548,8 +563,8 @@ _match:
 				) < -1 ) { goto convert_error; }
 	}
 	break;
-	case 27:
-#line 195 "memcache_parser.rl"
+	case 28:
+#line 199 "memcache_parser.rl"
 	{
 		if( CALLBACK(command, memcache_parser_callback_delete)(
 				MARK_PTR(key_pos[0]), parser->key_len[0],
@@ -558,7 +573,15 @@ _match:
 				) < -1 ) { goto convert_error; }
 	}
 	break;
-#line 562 "memcache_parser.c"
+	case 29:
+#line 207 "memcache_parser.rl"
+	{
+		if ( CALLBACK(command, memcache_parser_callback_quit)(parser->user) < -1) {
+			goto convert_error;
+		}
+	}
+	break;
+#line 585 "memcache_parser.c"
 		}
 	}
 
@@ -571,7 +594,7 @@ _again:
 	_out: {}
 	}
 
-#line 296 "memcache_parser.rl"
+#line 313 "memcache_parser.rl"
 
 ret:
 
@@ -803,6 +826,37 @@ static int php_memcache_parser_delete(
 	return 0;
 }
 
+static int php_memcache_parser_quit(void* user)
+{
+	TSRMLS_FETCH();
+	zval **params[3], *z_command, *z_key, *z_opts, *retval = NULL;
+	php_memcache_parser_t *ctx = (php_memcache_parser_t*)user;
+	int i = 0;
+
+	MAKE_STD_ZVAL(z_command);
+	MAKE_STD_ZVAL(z_key);
+	MAKE_STD_ZVAL(z_opts);
+	
+	ZVAL_STRING(z_command, "quit", 1);
+	ZVAL_NULL(z_key);
+	array_init(z_opts);
+	
+	params[0] = &z_command;
+	params[1] = &z_key;
+	params[2] = &z_opts;
+
+	php_memcache_parser_do_callback(&retval, ctx, params, 3 TSRMLS_CC);
+
+	if (retval != NULL) {
+		zval_ptr_dtor(&retval);
+	}
+	
+	zval_ptr_dtor(params[0]);
+	zval_ptr_dtor(params[1]);
+	zval_ptr_dtor(params[2]);
+	
+	return 0;}
+
 static inline void php_memcache_parser_cb_init(php_memcache_parser_t *ctx, zend_fcall_info *fci, zend_fcall_info_cache *fcc)
 {
 	php_memcache_parser_cb_t *cb;
@@ -861,6 +915,7 @@ PHP_FUNCTION(memcache_parser_init)
 	callback.cmd_prepend = php_memcache_parser_storage_prepend;
 	callback.cmd_cas     = php_memcache_parser_cas;
 	callback.cmd_delete  = php_memcache_parser_delete;
+	callback.cmd_quit    = php_memcache_parser_quit;
 
 	ctx = emalloc(sizeof(php_memcache_parser_t));
 	ctx->finished = 1;

@@ -69,6 +69,8 @@ enum {
 	CMD_CAS,
 
 	CMD_DELETE,
+
+	CMD_QUIT,
 };
 
 %%{
@@ -156,6 +158,8 @@ enum {
 
 	action cmd_delete  { parser->command = CMD_DELETE;  }
 
+	action cmd_quit    { parser->command = CMD_QUIT;    }
+
 
 	action do_retrieval {
 		unsigned int i;
@@ -200,6 +204,12 @@ enum {
 				) < -1 ) { goto convert_error; }
 	}
 
+	action do_quit {
+		if ( CALLBACK(command, memcache_parser_callback_quit)(parser->user) < -1) {
+			goto convert_error;
+		}
+	}
+
 	key        = ([\!-\~]+)          >mark_key        %key;
 	flags      = ('0' | [1-9][0-9]*) >mark_flags      %flags;
 	exptime    = ('0' | [1-9][0-9]*) >mark_exptime    %exptime;
@@ -221,8 +231,10 @@ enum {
 
 	delete_command = ('delete') @cmd_delete;
 
+	quit_command = ('quit') @cmd_quit;
 
 	retrieval = retrieval_command ' ' key (' ' key >incr_key)*
+				(' ')?
 				'\r\n';
 
 	storage = storage_command ' ' key
@@ -247,10 +259,15 @@ enum {
 				'\r\n'
 				;
 
+	quit = quit_command
+				'\r\n'
+				;
+
 	command = retrieval @do_retrieval
 			| storage   @do_storage
 			| cas       @do_cas
 			| delete    @do_delete
+			| quit      @do_quit
 			;
 
 main := (command >reset)+;
@@ -524,6 +541,37 @@ static int php_memcache_parser_delete(
 	return 0;
 }
 
+static int php_memcache_parser_quit(void* user)
+{
+	TSRMLS_FETCH();
+	zval **params[3], *z_command, *z_key, *z_opts, *retval = NULL;
+	php_memcache_parser_t *ctx = (php_memcache_parser_t*)user;
+	int i = 0;
+
+	MAKE_STD_ZVAL(z_command);
+	MAKE_STD_ZVAL(z_key);
+	MAKE_STD_ZVAL(z_opts);
+	
+	ZVAL_STRING(z_command, "quit", 1);
+	ZVAL_NULL(z_key);
+	array_init(z_opts);
+	
+	params[0] = &z_command;
+	params[1] = &z_key;
+	params[2] = &z_opts;
+
+	php_memcache_parser_do_callback(&retval, ctx, params, 3 TSRMLS_CC);
+
+	if (retval != NULL) {
+		zval_ptr_dtor(&retval);
+	}
+	
+	zval_ptr_dtor(params[0]);
+	zval_ptr_dtor(params[1]);
+	zval_ptr_dtor(params[2]);
+	
+	return 0;}
+
 static inline void php_memcache_parser_cb_init(php_memcache_parser_t *ctx, zend_fcall_info *fci, zend_fcall_info_cache *fcc)
 {
 	php_memcache_parser_cb_t *cb;
@@ -582,6 +630,7 @@ PHP_FUNCTION(memcache_parser_init)
 	callback.cmd_prepend = php_memcache_parser_storage_prepend;
 	callback.cmd_cas     = php_memcache_parser_cas;
 	callback.cmd_delete  = php_memcache_parser_delete;
+	callback.cmd_quit    = php_memcache_parser_quit;
 
 	ctx = emalloc(sizeof(php_memcache_parser_t));
 	ctx->finished = 1;
